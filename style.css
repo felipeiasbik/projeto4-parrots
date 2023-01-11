@@ -45,14 +45,14 @@ h1{
     height: 146px;
     margin: 0 34px 34px 0;
     position: relative;
-  }
+}
 
-  .face {
+.face {
     width: 100%;
     height: 100%;
     background-color: #A7E9AF;
-    border-radius: 10px;
-    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    border-radius: 5px;
+    border: 1px solid #99CEA8;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -60,27 +60,31 @@ h1{
     backface-visibility: hidden;
     transition: all .5s;
     transform-style: preserve-3d;
-  }
+}
 
-  .back-face {
+.back-face {
     transform: rotateY(180deg);
-  }
+}
 
-  .card:hover .back-face {
+.girarPtras {
     transform: rotateY(0deg);
-  }
+}
 
-  .card:hover .front-face {
+.girarPfrente {
     transform: rotateY(-180deg);
-  }
+}
 
-  .card img {
+.card img {
     width: 100px;
     height: 100px;
-  }
+}
 
 @media (max-width: 600px) {
 
+    .cabecalho {
+        width: 90%;
+    }
+    
     h1 {
         text-align: center;
     }
