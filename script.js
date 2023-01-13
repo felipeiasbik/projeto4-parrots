@@ -33,7 +33,7 @@ function turnCard(giro) {
     if (carta1.innerHTML === carta2.innerHTML) {
         acertou++;
     } else if (carta1 !== carta2) {
-        setTimeout(virar,800);
+        setTimeout(virar,1000);
         carta1.parentNode.setAttribute('onclick', 'turnCard(this)');
         carta2.parentNode.setAttribute('onclick', 'turnCard(this)');
     }
@@ -113,12 +113,12 @@ contar = 0;
 while (contar < numCartas){
     let criarCartas = document.querySelector('.area-cartas');
     criarCartas.innerHTML = criarCartas.innerHTML + `
-        <div class="card" onclick="turnCard(this)">
+        <div class="card" data-test="card" onclick="turnCard(this)">
             <div class="front face">
-                <img alt="Parte de trás da carta com imagem de um papagaio" src="img/${novaArray[contar]}.gif">
+                <img data-test="face-up-image" alt="Parte de trás da carta com imagem de um papagaio" src="img/${novaArray[contar]}.gif">
             </div>
             <div class="back face">
-                <img alt="Parte da frente da carta com um papagaio animado" src="img/back.png">
+                <img data-test="face-down-image" alt="Parte da frente da carta com um papagaio animado" src="img/back.png">
             </div>
         </div>
         `;
