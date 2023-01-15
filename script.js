@@ -1,7 +1,7 @@
 let contacliques = 0;
 const elementos = ['bobrossparrot', 'bobrossparrot', 'explodyparrot', 'explodyparrot', 'fiestaparrot', 'fiestaparrot', 'metalparrot', 'metalparrot', 'revertitparrot', 'revertitparrot', 'tripletsparrot', 'tripletsparrot', 'unicornparrot', 'unicornparrot']
-let carta1;
-let carta2;
+let carta1 = "";
+let carta2 = "";
 let ArrayGlobal = [];
 let acertou = 0;
 let numCartas = 0;
@@ -28,7 +28,7 @@ function comparador() {
 }
 
 function fim(){
-    resposta = prompt("Reiniciar a partida?");
+    resposta = prompt('Reiniciar a partida?\n\nDigite "sim" para continuar ou "não" para parar.\n(sem aspas)\n');
     if (resposta === "sim"){
     location.reload();
     } else if (resposta === "não"){
@@ -41,21 +41,28 @@ function fim(){
 function virar(){
     carta1.parentNode.classList.remove('revelar');
     carta2.parentNode.classList.remove('revelar');
+    carta1 = "";
+    carta2 = "";
 }
 
-function turnCard(giro) {
-    let girar = giro.querySelector('.front');
-    girar.parentNode.classList.add('revelar');
-    contacliques++;
-    if (contacliques % 2 !== 0 ){
-        carta1 = giro.querySelector('.front');
-        carta1.parentNode.removeAttribute('onclick');
-    } else if( contacliques % 2 === 0 ){
-        carta2 = giro.querySelector('.front');
-        carta2.parentNode.removeAttribute('onclick');
-        if (carta1.innerHTML === carta2.innerHTML) {
+let girar;
+function turnCard(giro){
+    girar = giro.querySelector('.front');
+    if (carta1 === ""){
+        contacliques++;
+        carta1 = girar;
+        carta1.parentNode.classList.add('revelar');
+    } else if (carta2 === ""){
+        contacliques++;
+        carta2 = girar;
+        carta2.parentNode.classList.add('revelar');
+        if (carta1.innerHTML === carta2.innerHTML){
+            carta1.parentNode.removeAttribute('onclick');
+            carta2.parentNode.removeAttribute('onclick');
             acertou++;
-        } else if (carta1 !== carta2) {
+            carta1 = "";
+            carta2 = "";
+        } else if (carta1.innerHTML !== carta2.innerHTML) {
             setTimeout(virar,1000);
             carta1.parentNode.setAttribute('onclick', 'turnCard(this)');
             carta2.parentNode.setAttribute('onclick', 'turnCard(this)');
