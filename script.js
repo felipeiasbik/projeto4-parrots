@@ -7,6 +7,7 @@ let acertou = 0;
 let numCartas = 0;
 let segundos = 0;
 let marcatempo = 0;
+let resposta;
 
 function tempo(){
 marcatempo = setInterval(timeron,1000);
@@ -17,7 +18,7 @@ function timeron(){
     segundos++;
     document.querySelector('.relogio').innerHTML = segundos;
 
-    if (acertou === numCartas / 2){
+    if (acertou >= numCartas / 2){
         clearInterval(marcatempo);
     }
 }
@@ -27,7 +28,14 @@ function comparador() {
 }
 
 function fim(){
-    alert(`Você ganhou em ${contacliques} jogadas! A duração do jogo foi de ${segundos} segundos!`);
+    resposta = prompt("Reiniciar a partida?");
+    if (resposta === "sim"){
+    location.reload();
+    } else if (resposta === "não"){
+        return;    
+    } else{
+        fim();    
+    }
 }
 
 function virar(){
@@ -53,13 +61,17 @@ function turnCard(giro) {
             carta2.parentNode.setAttribute('onclick', 'turnCard(this)');
         }
         if (acertou === numCartas / 2){
-            setTimeout(fim,50);
+            setTimeout(alert, 100, "Você ganhou em "+contacliques+" jogadas! A duração do jogo foi de "+segundos+" segundos!");
+            setTimeout(fim,110);
         }
     }
 
 }
 
+function inicio(){
 numCartas = prompt('Com quantas cartas quer jogar?');
+}
+inicio();
 
 while (numCartas % 2 !== 0 || numCartas < 4 || numCartas > 14){
     alert ('Valor inválido. Coloque um número par entre 4 e 14.')
